@@ -446,8 +446,6 @@ def _build_mod_menu(view, model, row, entry, sel_mods, multi, act, stub, divider
             (_mt("Open on Thunderstore"),
              lambda: _open_on_thunderstore(view, name)),
         ])
-    from gui_qt.loverslab_actions import menu_items as _ll_items
-    submenu(_mt("Lovers Lab Actions"), _ll_items(view, name, _mt))
     if _modio_url(view, name):
         act(_mt("Open on mod.io"), lambda: _open_on_modio(view, name))
     workshop_url = _workshop_url(view, name)
