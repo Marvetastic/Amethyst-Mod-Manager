@@ -10,11 +10,13 @@ import subprocess
 
 from Utils.github.cache import fetch_text as _gh_fetch_text
 
-_APP_UPDATE_RELEASES_API_URL = "https://api.github.com/repos/ChrisDKN/Amethyst-Mod-Manager/releases/latest"
-_APP_UPDATE_RELEASES_LIST_API_URL = "https://api.github.com/repos/ChrisDKN/Amethyst-Mod-Manager/releases?per_page=20"
-_APP_UPDATE_RELEASES_URL = "https://github.com/ChrisDKN/Amethyst-Mod-Manager/releases"
+# GitHub repo whose releases drive update checks (Amethyst Plus fork).
+_APP_UPDATE_REPO = "Marvetastic/Amethyst-Mod-Manager"
+_APP_UPDATE_RELEASES_API_URL = f"https://api.github.com/repos/{_APP_UPDATE_REPO}/releases/latest"
+_APP_UPDATE_RELEASES_LIST_API_URL = f"https://api.github.com/repos/{_APP_UPDATE_REPO}/releases?per_page=20"
+_APP_UPDATE_RELEASES_URL = f"https://github.com/{_APP_UPDATE_REPO}/releases"
 _APP_UPDATE_FLATPAK_BUNDLE_URL = (
-    "https://github.com/ChrisDKN/Amethyst-Mod-Manager/releases/download/"
+    f"https://github.com/{_APP_UPDATE_REPO}/releases/download/"
     "v{tag}/AmethystModManager.flatpak"
 )
 _APP_ID = "io.github.Amethyst.ModManager"

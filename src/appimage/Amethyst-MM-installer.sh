@@ -30,7 +30,7 @@ while [ $# -gt 0 ]; do
 done
 
 ARCH="$(uname -m)"
-REPO="ChrisDKN/Amethyst-Mod-Manager"
+REPO="Marvetastic/Amethyst-Mod-Manager"
 BASE_URL="https://raw.githubusercontent.com/${REPO}/main"
 ICON_URL="${BASE_URL}/src/icons/title-bar.png"
 RELEASES_API_URL="https://api.github.com/repos/${REPO}/releases/latest"
