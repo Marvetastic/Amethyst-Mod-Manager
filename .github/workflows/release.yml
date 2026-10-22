@@ -42,7 +42,7 @@ jobs:
       # A Pages dry-run only needs the Flatpak repo artifact - skip the
       # AppImage build to save CI time. Real runs build both.
       build_appimage: ${{ !inputs.dry_run_pages }}
-      build_flatpak: true
+      build_flatpak: ${{ github.repository == 'ChrisDKN/Amethyst-Mod-Manager' }}
       # Live-channel rehearsals must stamp the requested OSTree branch (a
       # dispatch ref is a branch name, so tag-derivation would pick stable
       # regardless). Empty for tag pushes / dry-runs → tag-derived / stable.
@@ -70,6 +70,7 @@ jobs:
           merge-multiple: true
           path: artifacts/
       - name: Download Flatpak
+        if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
         uses: actions/download-artifact@v4
         with:
           name: AmethystModManager-flatpak
@@ -84,6 +85,7 @@ jobs:
       # install command footer. Prereleases get the raw bullet list only.
       - name: Extract changelog section
         id: changelog
+        if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
         run: |
           tag='${{ github.ref_name }}'
           base="${tag%%-*}"
@@ -143,7 +145,7 @@ jobs:
       # Each beta keeps its own unique tag at publish time - the auto
       # updater only needs the new tag to exist.
       - name: Delete previous beta releases
-        if: contains(github.ref_name, '-')
+        if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager' && contains(github.ref_name, '-')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -159,7 +161,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: artifacts/*
-          prerelease: ${{ contains(github.ref_name, '-') }}
+          prerelease: ${{ github.repository == 'ChrisDKN/Amethyst-Mod-Manager' && contains(github.ref_name, '-') }}
           body_path: ${{ steps.changelog.outputs.found == 'true' && 'release-notes.md' || '' }}
           generate_release_notes: ${{ steps.changelog.outputs.found != 'true' }}
           fail_on_unmatched_files: true
@@ -190,7 +192,8 @@ jobs:
     # gh-pages-dryrun branch), or a live-channel rehearsal dispatch (live
     # remote, no GitHub Release).
     if: |
-      needs.build.result == 'success'
+      github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
+      && needs.build.result == 'success'
       && (startsWith(github.ref, 'refs/tags/v')
           || inputs.dry_run_pages
           || inputs.publish_live_channel != 'none')

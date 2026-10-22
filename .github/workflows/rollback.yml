@@ -33,6 +33,7 @@ permissions:
 
 jobs:
   rollback:
+    if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
     name: Rollback ${{ inputs.channel }}
     runs-on: ubuntu-latest
     env:

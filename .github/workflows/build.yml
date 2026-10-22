@@ -362,6 +362,15 @@ jobs:
       - name: Disk space before build
         run: df -h && du -sh /tmp 2>/dev/null || true
 
+      # Fork releases (tag v<upstream>-plus.N) carry the tag's version; the repo's
+      # src/version.py stays at upstream's value so upstream merges never conflict.
+      - name: Stamp fork version from tag
+        if: ${{ startsWith(github.ref_name, 'v') && contains(github.ref_name, '-plus.') }}
+        run: |
+          v='${{ github.ref_name }}'
+          sed -i "s/^__version__ = \".*\"$/__version__ = \"${v#v}\"/" src/version.py
+          cat src/version.py
+
       - name: Build AppImage
         run: bash src/appimage/make-appimage.sh
 

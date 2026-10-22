@@ -28,6 +28,7 @@ permissions:
 
 jobs:
   compile:
+    if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
     runs-on: ubuntu-latest
     steps:
       # Called and manually dispatched workflows run against the default branch,

@@ -23,6 +23,7 @@ permissions:
 
 jobs:
   push-source:
+    if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
     name: Copy amethyst_en.ts to Resources
     runs-on: ubuntu-latest
     steps:

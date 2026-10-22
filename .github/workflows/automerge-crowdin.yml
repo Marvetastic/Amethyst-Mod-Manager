@@ -25,6 +25,7 @@ permissions:
 jobs:
   merge:
     if: >-
+      github.repository == 'ChrisDKN/Amethyst-Mod-Manager' &&
       github.event.pull_request.title == 'New Crowdin updates' &&
       github.head_ref == 'l10n_Resources' &&
       github.base_ref == 'Resources'
@@ -38,6 +39,7 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
 
   compile:
+    if: github.repository == 'ChrisDKN/Amethyst-Mod-Manager'
     needs: merge
     uses: ./.github/workflows/compile-translations.yml
     permissions:
