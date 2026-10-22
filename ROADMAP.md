@@ -16,6 +16,8 @@ Based on open upstream issues and the codebase (numbers refer to `ChrisDKN/Ameth
 ## Planned
 
 ## In progress
+- **Lovers Lab source, phase 1** (`src/LoversLab`, branch `claude/modest-pascal-xybla8`): `[loverslab]` meta, link-to-page, update check. Still to do: update flag in the modlist, link archives from the downloads folder by file id.
+- **Lovers Lab source, phase 2** (blocked on reading LL's terms on automated access): "Add from URL" with automatic download via the existing `Utils/loverslab` client.
 
 ## Done
 - Fork infrastructure: independent releases, updater and installer repointed, upstream-only CI guarded.
