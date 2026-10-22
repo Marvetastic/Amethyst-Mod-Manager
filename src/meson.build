@@ -1,6 +1,5 @@
 subdir('Games')
 subdir('LOOT')
-subdir('LoversLab')
 subdir('Nexus')
 subdir('Thunderstore')
 subdir('Utils')
